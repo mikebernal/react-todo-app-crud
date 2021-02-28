@@ -5,38 +5,34 @@ import { useApp, useAppUpdate } from '../../AppContext';
 import { FormControl, InputLabel } from '@material-ui/core';
 import Select from 'react-select';
 
-// Styles
-import { makeStyles } from '@material-ui/core/styles';
-
-
 export const UserFilter = () => {
     let { users } = useApp();
     const handleChange = useAppUpdate();
 
     const onChange = (value: any, { action, removedValue }: any) => {
         const e = {
-            target: {
-                name: 'user',
-                value: '',
-            }
+          target: {
+            name: 'user',
+            value: '',
+          }
         };
 
         if (action === 'select-option') {
-            e.target.value = value.label;
-            handleChange(e);
+          e.target.value = value.label;
+          handleChange(e);
         }
     }
 
     let options: any = [{
-        value: 'all',
-        label: 'All'
+      value: 'all',
+      label: 'All'
     }];
 
     {users?.map((user: any) => {
-        options.push({
-          value: user.firstName,
-          label: user.firstName 
-        })
+      options.push({
+        value: user.firstName,
+        label: user.firstName 
+      })
     })}
 
     return (
