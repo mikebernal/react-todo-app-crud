@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Shame */
+.inputText {
+  width: 300px;
+}
+
+.selectComponent {
+  width: 200px;
+  margin-top: 1.5em;
+  line-height: 1.7em;
+}
+
+.completedSwitch {
+  margin-top: .2em;
+  height: 2.5em;
+}
+
+.userFilter {
+  padding-left: 20px;
+}
