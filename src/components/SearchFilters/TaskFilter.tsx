@@ -1,7 +1,6 @@
-// React
-import React from 'react'
+import { useAppUpdate } from '../../AppContext';
 
-// 3rd party libraries
+// Third-party libraries
 import { FormControl, InputLabel } from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 
@@ -51,12 +50,14 @@ const BootstrapInput = withStyles((theme: Theme) =>
 )(InputBase);
 
 export const TaskFilter = () => {
+  const handleChange = useAppUpdate();
+
     return (
-        <>
-          <FormControl>
-            <InputLabel shrink htmlFor="taskName">Task name</InputLabel>
-            <BootstrapInput name="taskName" />
-          </FormControl>
-        </>
+      <>
+        <FormControl>
+          <InputLabel shrink htmlFor="task">Task name</InputLabel>
+          <BootstrapInput name="task" onChange={handleChange}/>
+        </FormControl>
+      </>
     );
 }

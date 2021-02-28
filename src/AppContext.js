@@ -1,9 +1,8 @@
 // React
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
-// Models
-import UserModel from './models/UserModel';
-import TodosModel from './models/TodosModel';
+// Third-party libraries
+import axios from 'axios';
 
 // Context
 const AppContext = React.createContext();
@@ -20,18 +19,47 @@ export function useAppUpdate() {
 
 // Context wrapper
 export function AppProvider({ children }) {
-  const [completed, setCompleted] = useState(false);
+  // Application state variables
+  const [state, setState] = useState({ });
 
-  /**
-   * Toggle completed filter switch button
-   */
-  function toggleCompleted() {
-    setCompleted((prevCompleted) => (!prevCompleted));
-  }
+  // Application Effects
+  useEffect(() => {
+    // Get list of todos
+    (async function getTodos() {
+        // Get list of users
+        await axios.get(`/api/todos`).then((res) => (
+          setState(prevState => ({
+            ...prevState,
+            todos: res.data.todos,
+          }))
+        ));
+    })();
+
+    // Get list of users
+    (async function getUsers() {
+      await axios.get(`/api/users`).then((res) => (
+        setState(prevState => ({
+          ...prevState,
+          users: res.data.users,
+        }))
+      ));
+    })();
+
+  }, []);
+
+  // Update state variables dynamically
+  const updateFormValues = (e) => {
+    let { name, value } = e.target;
+
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   return (
-    <AppContext.Provider value={completed}>
-      <AppUpdateContext.Provider value={toggleCompleted}>
+    <AppContext.Provider value={state}>
+      <AppUpdateContext.Provider value={updateFormValues}>
         { children }
       </AppUpdateContext.Provider>
     </AppContext.Provider>
