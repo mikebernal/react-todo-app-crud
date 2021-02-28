@@ -44,3 +44,27 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+---
+## Components
+
+1. Task filter component
+2. User filter component
+3. isCompleted component
+4. searchResult component
+
+## Dependencies
+
+1. faker
+2. typescript
+3. miragejs
+4. axios
+5. material
+
+## Kanban
+
+https://github.com/mikebernal/react-todo-app-crud
+
+## Author
+
+Mike Bernal
