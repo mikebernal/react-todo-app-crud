@@ -1,4 +1,4 @@
-export interface TodosModel {
+export interface TodoModel {
     id: number;
     user: string;
     name: string;

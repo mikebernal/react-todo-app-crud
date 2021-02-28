@@ -55,7 +55,6 @@ export function AppProvider({ children }) {
       ...prevState,
       [name]: (name === 'completed') ? checked : value
     }));
-
   };
 
   return (

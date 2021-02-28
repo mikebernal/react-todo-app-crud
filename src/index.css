@@ -1,5 +1,6 @@
 body {
-  margin: 0;
+  margin: 1.2em 0 0 0;
+  text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,6 +14,12 @@ code {
 }
 
 /* Shame */
+
+.searchFilter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .inputText {
   width: 300px;
 }
@@ -30,4 +37,13 @@ code {
 
 .userFilter {
   padding-left: 20px;
+}
+
+.rowResult:hover {
+  background: rgba(250, 128, 171, 0.301);
+}
+
+.cta:hover {
+  color: rgb(196, 4, 4);
+  cursor: pointer;
 }

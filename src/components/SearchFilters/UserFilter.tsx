@@ -10,17 +10,17 @@ export const UserFilter = () => {
     const handleChange = useAppUpdate();
 
     const onChange = (value: any, { action, removedValue }: any) => {
-        const e = {
-          target: {
-            name: 'user',
-            value: '',
-          }
-        };
-
-        if (action === 'select-option') {
-          e.target.value = value.label;
-          handleChange(e);
+      const e = {
+        target: {
+          name: 'user',
+          value: '',
         }
+      };
+
+      if (action === 'select-option') {
+        e.target.value = value.label;
+        handleChange(e);
+      }
     }
 
     let options: any = [{
