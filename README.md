@@ -63,7 +63,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Kanban
 
-https://github.com/mikebernal/react-todo-app-crud
+https://github.com/mikebernal/react-todo-app-crud/projects/1
 
 ## Author
 

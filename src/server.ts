@@ -65,9 +65,12 @@ export function makeServer () {
             this.get("/users", (schema: any) => {
                 return schema.users.all()
             })
-            this.get("/user/:id/todos", (schema:any, request)=> {
-                const userID = request.params.id
-                const todos = schema.todos.where({userID: userID})
+            this.get("/user/:name/todos", (schema:any, request)=> {
+                const name   = request.params.name
+                const user   = schema.users.where((user: any) => user.firstName === name)
+                const userId = user.models[0].attrs.id;
+                const todos  = schema.todos.where((todo: any) => (todo.userId === userId))
+                
                 return {
                     todos: todos
                 }

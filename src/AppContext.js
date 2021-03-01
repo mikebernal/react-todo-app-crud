@@ -59,10 +59,10 @@ export function AppProvider({ children }) {
         )
       }));
 
-      applyFilters(value);
+      applyFilters(name, value);
     },
     deleteTask: async function (todo) {
-      await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
+      await axios.delete(`/api/todo/${todo.id}/delete`).then((res) => (
         setState(prevState => ({
           ...prevState,
           todos: res.data.todos.models
@@ -72,22 +72,47 @@ export function AppProvider({ children }) {
   };
 
   // Update todo list by filters
-  const applyFilters = async (value) => {
-    // Filter by task name
-    if (value.length !== 0) {
-      await axios.get(`api/todo/${value}`).then((res) => (
-        setState(prevState => ({
-          ...prevState,
-          todos: res.data.todo.models
-        }))
-      ));
-    } else {
-      await axios.get(`/api/todos`).then((res) => (
-        setState(prevState => ({
-          ...prevState,
-          todos: res.data.todos,
-        }))
-      ));
+  const applyFilters = async (name, value) => {
+    switch(name) {
+      case 'task':
+        // Filter by task name
+        if (value.length !== 0) {
+          await axios.get(`/api/todo/${value}`).then((res) => (
+            setState(prevState => ({
+              ...prevState,
+              todos: res.data.todo.models
+            }))
+          ));
+        } else {
+          await axios.get(`/api/todos`).then((res) => (
+            setState(prevState => ({
+              ...prevState,
+              todos: res.data.todos,
+            }))
+          ));
+        }
+        break;
+      case 'user':
+        // Filter by user name
+        if (value !== 'All') {
+          await axios.get(`/api/user/${value}/todos`).then((res) => (
+            setState(prevState => ({
+              ...prevState,
+              todos: res.data.todos.models
+            }))
+          ));
+        } else {
+          await axios.get(`/api/todos`).then((res) => (
+            setState(prevState => ({
+              ...prevState,
+              todos: res.data.todos,
+            }))
+          ));
+        }
+        break;
+
+      default:
+        console.log('error');
     }
   };
 
