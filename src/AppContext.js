@@ -26,7 +26,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     // Get list of todos
     (async function getTodos() {
-      // Get list of users
+      // Get list of todos
       await axios.get(`/api/todos`).then((res) => (
         setState(prevState => ({
           ...prevState,
@@ -59,7 +59,7 @@ export function AppProvider({ children }) {
         )
       }));
 
-      applyFilters();
+      applyFilters(value);
     },
     deleteTask: async function (todo) {
       await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
@@ -72,14 +72,22 @@ export function AppProvider({ children }) {
   };
 
   // Update todo list by filters
-  const applyFilters = () => {
+  const applyFilters = async (value) => {
     // Filter by task name
-    if (state.task) {
-      console.log(state.task);
-      setState(prevState => ({
-        ...prevState,
-        todosFilterByName: state.todos.filter(todo=> todo.name.toLowerCase().search(state.task) !== -1)
-      }));
+    if (value.length !== 0) {
+      await axios.get(`api/todo/${value}`).then((res) => (
+        setState(prevState => ({
+          ...prevState,
+          todos: res.data.todo.models
+        }))
+      ));
+    } else {
+      await axios.get(`/api/todos`).then((res) => (
+        setState(prevState => ({
+          ...prevState,
+          todos: res.data.todos,
+        }))
+      ));
     }
   };
 

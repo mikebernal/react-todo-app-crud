@@ -36,7 +36,7 @@ const renderBool = (isCompleted: boolean) => {
 };
 
 export const SearchResults = () => {
-  let { todos } = useApp();
+  let { todos, filterByName } = useApp();
   const { deleteTask } = useAppUpdate();
 
   const classes = useStyles();
@@ -53,7 +53,8 @@ export const SearchResults = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {todos?.map((todo: TodoModel, i: number) => (
+          
+          {(todos)?.map((todo: TodoModel, i: number) => (
             <TableRow key={todo.id} className="rowResult">
               <TableCell component="th">
                 {todo.name}

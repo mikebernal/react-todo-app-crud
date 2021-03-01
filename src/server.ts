@@ -79,11 +79,12 @@ export function makeServer () {
                 console.log(active)
                 return schema.todos.all()
             })
-            this.get("/todo/:id", (schema:any, request)=>{
-                const todoId = request.params.id
-                const todo = schema.todos.find(todoId)
+            this.get("/todo/:name", (schema:any, request)=>{
+                const taskName = request.params.name
+                console.log(taskName);
+                const todo = schema.todos.where((row: any) => row.name.toLowerCase().search(taskName.toLowerCase()) !== -1)
                 return {
-                    todo:todo
+                    todo: todo
                 }
             })
             this.delete("/todo/:id/delete", (schema:any, request)=> {
