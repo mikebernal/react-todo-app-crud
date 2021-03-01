@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import axios from "axios";
 
 // Styles
 import { makeStyles } from '@material-ui/core/styles';
@@ -37,8 +36,8 @@ const renderBool = (isCompleted: boolean) => {
 
 // Todo: render user tasks relationship (`/user/:id/todos`)
 export const SearchResults = () => {
-  let { todos, todosFilterByName } = useApp();
-  const deleteTask = useAppUpdate();
+  let { todos } = useApp();
+  const { deleteTask } = useAppUpdate();
 
   const classes = useStyles();
 
@@ -53,7 +52,7 @@ export const SearchResults = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(todosFilterByName||todos)?.map((todo: TodoModel, i: number) => (
+          {todos?.map((todo: TodoModel, i: number) => (
             <TableRow key={todo.id} className="rowResult">
               <TableCell component="th">
                 {todo.name}

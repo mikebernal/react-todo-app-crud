@@ -7,7 +7,7 @@ import Select from 'react-select';
 
 export const UserFilter = () => {
     let { users } = useApp();
-    const handleChange = useAppUpdate();
+    let { updateFormValues } = useAppUpdate();
 
     const onChange = (value: any, { action, removedValue }: any) => {
       const e = {
@@ -19,7 +19,7 @@ export const UserFilter = () => {
 
       if (action === 'select-option') {
         e.target.value = value.label;
-        handleChange(e);
+        updateFormValues(e);
       }
     }
 

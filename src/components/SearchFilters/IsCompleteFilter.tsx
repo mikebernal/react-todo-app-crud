@@ -9,7 +9,7 @@ import { Box, FormControl, InputLabel } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
 
 export const IsCompleteFilter: React.FC = () => {
-  const handleChange = useAppUpdate();
+  let { updateFormValues } = useAppUpdate();
 
   return (
     <Box pl={3} component="span">
@@ -19,7 +19,7 @@ export const IsCompleteFilter: React.FC = () => {
         </InputLabel>
         <br />
         <Switch
-          onChange={handleChange}
+          onChange={updateFormValues}
           name="completed"
         />
       </FormControl>

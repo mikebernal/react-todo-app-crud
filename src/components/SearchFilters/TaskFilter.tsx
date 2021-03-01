@@ -50,13 +50,13 @@ const BootstrapInput = withStyles((theme: Theme) =>
 )(InputBase);
 
 export const TaskFilter = () => {
-  const handleChange = useAppUpdate();
+  let { updateFormValues } = useAppUpdate();
 
     return (
       <>
         <FormControl>
           <InputLabel shrink htmlFor="task">Task name</InputLabel>
-          <BootstrapInput name="task" onChange={handleChange}/>
+          <BootstrapInput name="task" onChange={updateFormValues}/>
         </FormControl>
       </>
     );

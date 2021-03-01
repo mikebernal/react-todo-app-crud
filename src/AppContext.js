@@ -47,18 +47,28 @@ export function AppProvider({ children }) {
 
   }, []);
 
-  // Update state variables dynamically
-  const updateFormValues = (e) => {
-    let { name, value, checked } = e.target;
+  // Global functions
+  let fn = {
+    updateFormValues: async function (e) {
+      let { name, value, checked } = e.target;
 
-    setState(prevState => ({
-      ...prevState,
-      [name]: (
-        (name === 'completed') ? checked : value
-      )
-    }));
+      await setState(prevState => ({
+        ...prevState,
+        [name]: (
+          (name === 'completed') ? checked : value
+        )
+      }));
 
-    applyFilters();
+      applyFilters();
+    },
+    deleteTask: async function (todo) {
+      await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
+        setState(prevState => ({
+          ...prevState,
+          todos: res.data.todos.models
+        }))
+      ));
+    }
   };
 
   // Update todo list by filters
@@ -73,42 +83,11 @@ export function AppProvider({ children }) {
     }
   };
 
-  const deleteTask = async (todo) => (
-    await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
-      setState(prevState => ({
-        ...prevState,
-        todos: res.data.todos.models
-      }))
-
-    ))
-  );
-
   return (
     <AppContext.Provider value={state}>
-      <AppUpdateContext.Provider value={updateFormValues, deleteTask}>
+      <AppUpdateContext.Provider value={fn}>
         { children }
       </AppUpdateContext.Provider>
     </AppContext.Provider>
   );
 }
-
-// Todo: Filter todo list by task name
-/**
- *  if (task) {
- *    todos.filter(todo => todo.name === value)
- *  }
- */
-
-// Todo: Fitler todo list by task.user
-/**
- *  if (name) {
- *    todos.filter(todo => todo.user === value)
- *  }
- */
-
-// Todo: Fitler todo list by task.isCompleted
-/**
- *  if (completed) {
- *    todos.filter(todo => todo.isCompleted === value)
- *  }
- */
