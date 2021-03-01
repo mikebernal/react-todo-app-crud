@@ -47,3 +47,12 @@ code {
   color: rgb(196, 4, 4);
   cursor: pointer;
 }
+
+.addBtn {
+  background-color: none;
+  display: inline-block;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10em;
+  margin: 1.2em 0;
+}

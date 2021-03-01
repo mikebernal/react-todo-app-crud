@@ -15,7 +15,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
@@ -26,7 +25,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   table: {
-    maxWidth: 1200,
+    maxWidth: 1230,
     margin: '1.2em auto',
   },
 });
@@ -59,10 +58,9 @@ export const SearchResults = () => {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="center">User</TableCell>
+              <TableCell>To do</TableCell>
               <TableCell align="center">Completed</TableCell>
-              <TableCell align="center" colSpan={2}>Actions</TableCell>
+              <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,10 +69,8 @@ export const SearchResults = () => {
                 <TableCell component="th">
                   {todo.name}
                 </TableCell>
-                <TableCell align="center">{todo.user}</TableCell>
                 <TableCell align="center">{renderBool(todo.isComplete)}</TableCell>
                 <TableCell align="center"><span className="cta" onClick={() => deleteTask(todo)}><DeleteIcon/></span></TableCell>
-                <TableCell align="center"><span className="cta"><EditIcon /></span></TableCell>
               </TableRow>
             ))}
           </TableBody>

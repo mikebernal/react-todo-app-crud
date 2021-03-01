@@ -6,6 +6,7 @@ import { TaskFilter } from './components/SearchFilters/TaskFilter';
 import { UserFilter } from './components/SearchFilters/UserFilter';
 import { IsCompleteFilter } from './components/SearchFilters/IsCompleteFilter';
 import { SearchResults } from './components/SearchResults';
+import { AddTask } from './components/AddTask';
 
 // Styles
 import './App.css';
@@ -19,6 +20,7 @@ function App() {
         <IsCompleteFilter />
       </div>
       <SearchResults />
+      <AddTask />
     </AppProvider>
   );
 }
