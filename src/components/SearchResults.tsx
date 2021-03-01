@@ -14,7 +14,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
@@ -41,40 +40,40 @@ const renderBool = (isCompleted: boolean) => {
 
 // Todo: render user tasks relationship (`/user/:id/todos`)
 export const SearchResults = () => {
-    let { todos } = useApp();
-    const updateResults = useAppUpdate();
+  let { todos } = useApp();
+  const updateResults = useAppUpdate();
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const deleteTask = async (todo: any) => (
-      await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
-        console.log(todo.name + ' has been deleted successfully!')
-        // Todo: Update search results here
-      ))
-    );
+  const deleteTask = async (todo: any) => (
+    await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
+      console.log(todo.name + ' has been deleted successfully!')
+      // Todo: Update search results here
+    ))
+  );
 
-    return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>To do</TableCell>
-              <TableCell align="center">Completed</TableCell>
-              <TableCell align="center">Delete</TableCell>
+  return (
+    <TableContainer>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>To do</TableCell>
+            <TableCell align="center">Completed</TableCell>
+            <TableCell align="center">Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {todos?.map((todo: TodoModel, i: number) => (
+            <TableRow key={todo.id} className="rowResult">
+              <TableCell component="th">
+                {todo.name}
+              </TableCell>
+              <TableCell align="center">{renderBool(todo.isComplete)}</TableCell>
+              <TableCell align="center"><span className="cta" onClick={() => deleteTask(todo)}><DeleteIcon/></span></TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {todos?.map((todo: TodoModel, i: number) => (
-              <TableRow key={todo.id} className="rowResult">
-                <TableCell component="th">
-                  {todo.name}
-                </TableCell>
-                <TableCell align="center">{renderBool(todo.isComplete)}</TableCell>
-                <TableCell align="center"><span className="cta" onClick={() => deleteTask(todo)}><DeleteIcon/></span></TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }

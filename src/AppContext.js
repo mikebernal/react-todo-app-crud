@@ -49,11 +49,15 @@ export function AppProvider({ children }) {
 
   // Update state variables dynamically
   const updateFormValues = (e) => {
+    let toggle = false;
+    console.log(e.target.value);
     let { name, value, checked } = e.target;
 
     setState(prevState => ({
       ...prevState,
-      [name]: (name === 'completed') ? checked : value
+      [name]: (
+        (name === 'completed') ? checked : value
+      )
     }));
   };
 
