@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
@@ -34,7 +35,6 @@ const renderBool = (isCompleted: boolean) => {
   return <CheckCircleOutlineIcon />;
 };
 
-// Todo: render user tasks relationship (`/user/:id/todos`)
 export const SearchResults = () => {
   let { todos } = useApp();
   const { deleteTask } = useAppUpdate();
@@ -48,6 +48,7 @@ export const SearchResults = () => {
           <TableRow>
             <TableCell>To do</TableCell>
             <TableCell align="center">Completed</TableCell>
+            <TableCell align="center">Edit</TableCell>
             <TableCell align="center">Delete</TableCell>
           </TableRow>
         </TableHead>
@@ -58,6 +59,7 @@ export const SearchResults = () => {
                 {todo.name}
               </TableCell>
               <TableCell align="center">{renderBool(todo.isComplete)}</TableCell>
+              <TableCell align="center"><span className="cta" ><EditIcon/></span></TableCell>
               <TableCell align="center"><span className="cta" onClick={() => deleteTask(todo)}><DeleteIcon/></span></TableCell>
             </TableRow>
           ))}
