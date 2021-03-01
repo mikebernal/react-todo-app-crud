@@ -26,13 +26,13 @@ export function AppProvider({ children }) {
   useEffect(() => {
     // Get list of todos
     (async function getTodos() {
-        // Get list of users
-        await axios.get(`/api/todos`).then((res) => (
-          setState(prevState => ({
-            ...prevState,
-            todos: res.data.todos,
-          }))
-        ));
+      // Get list of users
+      await axios.get(`/api/todos`).then((res) => (
+        setState(prevState => ({
+          ...prevState,
+          todos: res.data.todos,
+        }))
+      ));
     })();
 
     // Get list of users
@@ -49,8 +49,6 @@ export function AppProvider({ children }) {
 
   // Update state variables dynamically
   const updateFormValues = (e) => {
-    let toggle = false;
-    console.log(e.target.value);
     let { name, value, checked } = e.target;
 
     setState(prevState => ({
@@ -59,6 +57,20 @@ export function AppProvider({ children }) {
         (name === 'completed') ? checked : value
       )
     }));
+
+    applyFilters();
+  };
+
+  // Update todo list by filters
+  const applyFilters = () => {
+    // Filter by task name
+    if (state.task) {
+      console.log(state.task);
+      setState(prevState => ({
+        ...prevState,
+        todosFilterByName: state.todos.filter(todo=> todo.name.toLowerCase().search(state.task) !== -1)
+      }));
+    }
   };
 
   return (
@@ -69,3 +81,24 @@ export function AppProvider({ children }) {
     </AppContext.Provider>
   );
 }
+
+// Todo: Filter todo list by task name
+/**
+ *  if (task) {
+ *    todos.filter(todo => todo.name === value)
+ *  }
+ */
+
+// Todo: Fitler todo list by task.user
+/**
+ *  if (name) {
+ *    todos.filter(todo => todo.user === value)
+ *  }
+ */
+
+// Todo: Fitler todo list by task.isCompleted
+/**
+ *  if (completed) {
+ *    todos.filter(todo => todo.isCompleted === value)
+ *  }
+ */

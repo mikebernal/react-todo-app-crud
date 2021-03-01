@@ -40,8 +40,8 @@ const renderBool = (isCompleted: boolean) => {
 
 // Todo: render user tasks relationship (`/user/:id/todos`)
 export const SearchResults = () => {
-  let { todos } = useApp();
-  const updateResults = useAppUpdate();
+  let { todos, todosFilterByName } = useApp();
+  let results: any[] = [];
 
   const classes = useStyles();
 
@@ -63,7 +63,7 @@ export const SearchResults = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {todos?.map((todo: TodoModel, i: number) => (
+          {(todosFilterByName||todos)?.map((todo: TodoModel, i: number) => (
             <TableRow key={todo.id} className="rowResult">
               <TableCell component="th">
                 {todo.name}
