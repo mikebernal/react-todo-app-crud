@@ -89,7 +89,11 @@ export function makeServer () {
             this.delete("/todo/:id/delete", (schema:any, request)=> {
                 const todoId = request.params.id
                 schema.todos.find(todoId).destroy()
-                return {success:true}
+
+                return {
+                    success:true,
+                    todos: schema.todos.all()
+                }
 
             })
             this.post("/todo/create", (schema:any,request)=>{

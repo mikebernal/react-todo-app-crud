@@ -73,9 +73,19 @@ export function AppProvider({ children }) {
     }
   };
 
+  const deleteTask = async (todo) => (
+    await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
+      setState(prevState => ({
+        ...prevState,
+        todos: res.data.todos.models
+      }))
+
+    ))
+  );
+
   return (
     <AppContext.Provider value={state}>
-      <AppUpdateContext.Provider value={updateFormValues}>
+      <AppUpdateContext.Provider value={updateFormValues, deleteTask}>
         { children }
       </AppUpdateContext.Provider>
     </AppContext.Provider>

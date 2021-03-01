@@ -1,6 +1,3 @@
-// React
-import { useEffect } from 'react';
-
 // Context
 import { useApp, useAppUpdate } from '../AppContext';
 
@@ -41,16 +38,9 @@ const renderBool = (isCompleted: boolean) => {
 // Todo: render user tasks relationship (`/user/:id/todos`)
 export const SearchResults = () => {
   let { todos, todosFilterByName } = useApp();
-  let results: any[] = [];
+  const deleteTask = useAppUpdate();
 
   const classes = useStyles();
-
-  const deleteTask = async (todo: any) => (
-    await axios.delete(`api/todo/${todo.id}/delete`).then((res) => (
-      console.log(todo.name + ' has been deleted successfully!')
-      // Todo: Update search results here
-    ))
-  );
 
   return (
     <TableContainer>
